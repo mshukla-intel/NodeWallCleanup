@@ -1,11 +1,6 @@
 #!/bin/bash
-echo "============================  crictl images output before clean up =================== "
-crictl images
-echo "============================  crictl images output before clean up =================== "
+echo "============================  oc login =================== "
 oc login --token=sha256~a-nBb0cwJolBlpO6H42hXxBv8rrkNC-OU1S5WOI2S84 --server=https://api.cfa.devcloud.intel.com:6443 --insecure-skip-tls-verify=true
-echo "============================  node cleanup invoked =================== "
-oc debug node/$(oc get pods -o json |jq '.items[].spec.nodeName'|sed 's/"//g') -T -- chroot /host sh -c "/etc/nodecleanup.sh"
-echo "============================  crictl images output AFTER =================== "
-crictl images
-echo "============================  crictl images output AFTER =================== "
+echo "============================  node cleanup invoking =================== "
+oc debug node/worker26 -T -- chroot /host sh -c "/etc/nodecleanup.sh"
 echo "============================  node cleanup successful =================== "
