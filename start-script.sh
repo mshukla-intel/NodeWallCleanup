@@ -9,7 +9,7 @@ echo "============================  loop through OUTPUT... =================== "
 for id in $(cat out.txt);
     do
     echo "Ganesha..."
-    echo "$i clean up";
+    echo "$id clean up";
 #    oc debug node/$NODE_NAME -T -- chroot /host sh -c "crictl rm $id"
 done
 rm -rf out.txt
