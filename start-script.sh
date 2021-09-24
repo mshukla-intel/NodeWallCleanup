@@ -8,7 +8,7 @@ oc login --token=$TOKEN --server=https://api.cfa.devcloud.intel.com:6443 --insec
 echo "============================  node cleanup invoking rmi prune =================== "
 oc debug node/$NODE_NAME -T -- chroot /host sh -c "crictl rmi --prune"
 echo "============================  obtaining list of exited resources =================== "
-oc debug node/worker26 -T -- chroot /host bash -c "crictl ps -a | grep -i exited" | awk '{print $1}' > /tmp/out.txt
+oc debug node/$NODE_NAME -T -- chroot /host bash -c "crictl ps -a | grep -i exited" | awk '{print $1}' > /tmp/out.txt
 echo "============================  loop through OUTPUT... =================== "
 for id in $(cat /tmp/out.txt);
     do
