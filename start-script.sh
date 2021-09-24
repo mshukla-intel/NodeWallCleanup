@@ -1,9 +1,10 @@
 #!/bin/bash
+echo "TOKEN====" $TOKEN
+echo "NODE_NAME====" $NODE_NAME
+
 echo "============================  oc login =================== "
 # oc login -u $USR -p $KEY --server=https://api.cfa.devcloud.intel.com:6443 --insecure-skip-tls-verify=true
 oc login --token=$TOKEN --server=https://api.cfa.devcloud.intel.com:6443 --insecure-skip-tls-verify=true
-echo "USR===="
-echo $USR
 echo "============================  node cleanup invoking rmi prune =================== "
 oc debug node/$NODE_NAME -T -- chroot /host sh -c "crictl rmi --prune"
 echo "============================  obtaining list of exited resources =================== "
